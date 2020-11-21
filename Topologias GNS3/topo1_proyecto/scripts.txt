@@ -1,0 +1,231 @@
+DIST 1 Y 2 TRUNK:
+=========================
+
+interface range fastEthernet 1/0 - 7
+switchport mode trunk
+exit
+
+VTP SERVER - VLANS DIST 1
+=========================
+vlan database
+vlan 13 name RED1
+vlan 23 name RED2
+vlan 33 name RED3
+vlan 43 name RED4
+vtp domain T1Grupo3
+vtp password T1Grupo3
+vtp v2-mode
+vtp server
+
+
+
+VTP CLIENT DIST 2
+=========================
+vlan database
+vtp domain T1Grupo3
+vtp password T1Grupo3
+vtp v2-mode
+vtp server
+
+
+
+DIST 1 Y 2 PORT CHANNEL:
+=========================
+
+interface range fastEthernet 1/4 - 7
+channel-group 1 mode on
+exit
+
+
+
+
+DISTRIBUCION_1 HSRP
+============================================
+interface Vlan13
+ ip address 192.168.10.252 255.255.255.0
+ no shutdown
+ standby 13 ip 192.168.10.254
+ standby 13 priority 120
+ standby 13 preempt
+exit
+
+interface Vlan23
+ ip address 192.168.20.252 255.255.255.0
+ no shutdown
+ standby 23 ip 192.168.20.254
+ standby 23 priority 120
+ standby 23 preempt
+exit
+
+interface Vlan33
+ ip address 192.168.30.252 255.255.255.0
+ no shutdown
+ standby 33 ip 192.168.30.254
+ standby 33 priority 120
+ standby 33 preempt
+exit
+
+interface Vlan43
+ ip address 192.168.40.252 255.255.255.0
+ no shutdown
+ standby 43 ip 192.168.40.254
+ standby 43 priority 120
+ standby 43 preempt
+exit
+
+DISTRIBUCION_2 HSRP
+============================================
+interface Vlan13
+ ip address 192.168.10.253 255.255.255.0
+ no shutdown
+ standby 13 ip 192.168.10.254
+ standby 13 priority 110
+exit
+
+interface Vlan23
+ ip address 192.168.20.253 255.255.255.0
+ no shutdown
+ standby 23 ip 192.168.20.254
+ standby 23 priority 110
+exit
+
+interface Vlan33
+ ip address 192.168.30.253 255.255.255.0
+ no shutdown
+ standby 33 ip 192.168.30.254
+ standby 33 priority 110
+exit
+
+interface Vlan43
+ ip address 192.168.40.253 255.255.255.0
+ no shutdown
+ standby 43 ip 192.168.40.254
+ standby 43 priority 110
+exit
+
+
+
+
+
+NUCLEO1:
+=============================
+int fastEthernet 0/1
+ip address 13.0.0.2 255.255.255.252
+no shutdown
+exit
+
+int fastEthernet 1/0
+ip address 33.0.0.2 255.255.255.252
+no shutdown
+exit
+
+int fastEthernet 0/0
+ip address 53.0.0.2 255.255.255.252
+no shutdown
+exit
+
+
+
+
+
+NUCLEO2:
+=============================
+int fastEthernet 0/1
+ip address 23.0.0.2 255.255.255.252
+no shutdown
+exit
+
+int fastEthernet 1/0
+ip address 43.0.0.2 255.255.255.252
+no shutdown
+exit
+
+int fastEthernet 0/0
+ip address 63.0.0.2 255.255.255.252
+no shutdown
+exit
+
+
+
+
+
+R1:
+==============
+int fastEthernet 0/0
+ip address 53.0.0.1 255.255.255.252
+no shutdown
+exit
+
+int fastEthernet 0/1
+ip address 63.0.0.1 255.255.255.252
+no shutdown
+exit
+
+
+
+
+
+
+
+
+
+PROTOCOLO RIP:
+=====================================
+
+
+DIST1:
+--------------------
+router rip
+version 2
+network 192.168.10.0
+network 192.168.20.0
+network 192.168.30.0
+network 192.168.40.0
+network 23.0.0.0
+network 13.0.0.0
+no auto-summary
+
+DIST2:
+--------------------
+router rip
+version 2
+network 192.168.10.0
+network 192.168.20.0
+network 192.168.30.0
+network 192.168.40.0
+network 43.0.0.0
+network 33.0.0.0
+no auto-summary
+
+NUCLEO1:
+---------------------
+router rip
+version 2
+network 33.0.0.0
+network 53.0.0.0
+network 13.0.0.0
+no auto-summary
+
+NUCLEO2:
+---------------------
+router rip
+version 2
+network 23.0.0.0
+network 43.0.0.0
+network 63.0.0.0
+no auto-summary
+
+R1:
+---------------------
+router rip
+version 2
+network 53.0.0.0
+network 63.0.0.0
+no auto-summary
+
+RUTEO ESTATICO R1:
+==========================
+
+ip route 0.0.0.0 0.0.0.0 fastEthernet 1/0
+
+

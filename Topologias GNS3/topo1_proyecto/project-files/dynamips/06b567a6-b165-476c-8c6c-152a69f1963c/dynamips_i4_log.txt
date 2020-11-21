@@ -1,0 +1,19 @@
+Nov 16 12:37:17.874 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Nov 16 12:37:17.875 HYPERVISOR: Started on IP = localhost, TCP port = 59345.
+Nov 16 12:37:18.355 HYPERVISOR: exec_cmd: hypervisor version 
+Nov 16 12:37:18.356 HYPERVISOR: exec_cmd: hypervisor working_dir B:\USAC\Segundo Semestre 2020\REDES 1\Laboratorio\topo1_proyecto\project-files\dynamips 
+Nov 16 12:37:18.356 GENERAL: working_dir=B:\USAC\Segundo Semestre 2020\REDES 1\Laboratorio\topo1_proyecto\project-files\dynamips
+Nov 16 12:37:18.357 HYPERVISOR: exec_cmd: ethsw create Switch4 
+Nov 16 12:37:21.248 HYPERVISOR: exec_cmd: nio create_udp udp-a40d0275-0073-4dd6-8d78-4cbaf63ec7bc 20000 127.0.0.1 20001 
+Nov 16 12:37:21.248 HYPERVISOR: exec_cmd: ethsw add_nio Switch4 udp-a40d0275-0073-4dd6-8d78-4cbaf63ec7bc 
+Nov 16 12:37:21.263 HYPERVISOR: exec_cmd: ethsw set_access_port Switch4 udp-a40d0275-0073-4dd6-8d78-4cbaf63ec7bc 43 
+Nov 16 12:37:21.501 HYPERVISOR: exec_cmd: nio create_udp udp-b26a0b7d-c149-4bf5-8992-d39d6b5f5e3a 20008 127.0.0.1 20009 
+Nov 16 12:37:21.502 HYPERVISOR: exec_cmd: ethsw add_nio Switch4 udp-b26a0b7d-c149-4bf5-8992-d39d6b5f5e3a 
+Nov 16 12:37:21.512 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch4 udp-b26a0b7d-c149-4bf5-8992-d39d6b5f5e3a 1 
+Nov 16 12:37:21.848 HYPERVISOR: exec_cmd: nio create_udp udp-4bf2eada-4525-43bb-b015-f8164e4729bd 20012 127.0.0.1 20013 
+Nov 16 12:37:21.848 HYPERVISOR: exec_cmd: ethsw add_nio Switch4 udp-4bf2eada-4525-43bb-b015-f8164e4729bd 
+Nov 16 12:37:21.860 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch4 udp-4bf2eada-4525-43bb-b015-f8164e4729bd 1 
+Nov 16 13:09:05.700 HYPERVISOR: exec_cmd: ethsw delete Switch4 
+Nov 16 13:09:05.744 HYPERVISOR: exec_cmd: hypervisor stop 
+Nov 16 13:09:06.046 HYPERVISOR: Stopped.
+Nov 16 13:09:06.046 GENERAL: reset done.
